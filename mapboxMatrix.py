@@ -40,8 +40,8 @@ def populate_constructor():
         geo_json_builder = ConstructGeoJson(item[0], item[1])
 
 def main():
-    # populate_constructor()
-    help(mapbox.DirectionsMatrix)
-    
+    populate_constructor()
+
+
 if __name__ == "__main__":
     main()
