@@ -1,5 +1,5 @@
-import mapbox
-import pydash
+# import mapbox
+# import pydash
 
 origin = [-0.071132, 51.518891]
 collection_one = {'York Terrace West':[-0.150578775,51.52412738]
@@ -39,8 +39,18 @@ def populate_constructor():
     for item in collection_one.items():
         geo_json_builder = ConstructGeoJson(item[0], item[1])
 
+def create_list_names():
+    # for item in collection_one.items():
+    #     list_names = item[0]
+    #     print(list_names)
+    # x = collection_one.keys()
+    # print(x)
+    y = r'York Terrace West', 'York Square Gardens', 'York Rise Estate Gardens', 'York House Gardens *', 'York Gardens', 'Yeading Walk', 'Yardley Recreation Ground', 'Yalta Memorial Garden', 'Wyck Gardens', 'WWT London Wetland Centre', 'Wrythe Recreation Ground', 'Wrythe Green', 'Wormwood Scrubs including Old Oak Common', 'Wormholt Park', 'Wormholt Estate', "World's End Estate", 'Woolwich Common and Royal Artillery Barracks', 'Woolwich Cemetery (Old and New)', 'Wool House Garden', 'Woodside Park'
+    print(y.replace("'",""))
+
 def main():
-    populate_constructor()
+    # populate_constructor()
+    create_list_names()
 
 
 if __name__ == "__main__":
