@@ -96,24 +96,25 @@ class ConstructGeoJson:
                             'properties': {'name': self.name},
                             'geometry': {'type': 'Point',
                                         'coordinates': self.coordinates}}
-        print(str("_".join(self.name.split())), ' = ', geo_json_item)
+        print(str("_".join(self.name.split())), ' = ', geo_json_item, ',')
 
 def populate_constructor():
     for item in collection_one.items():
         geo_json_builder = ConstructGeoJson(item[0], item[1])
+        # return geo_json_builder
 
 def create_list_names():
-    # for item in collection_one.items():
-    #     list_names = item[0]
-    #     print(list_names)
+    list_names = []
+    for item in collection_one.items():
+        names = list_names.append(item[0])
+    print(list_names)
     # x = collection_one.keys()
     # print(x)
-    York Terrace West, York Square Gardens, York Rise Estate Gardens, York House Gardens *, York Gardens, Yeading Walk, Yardley Recreation Ground, Yalta Memorial Garden, Wyck Gardens, WWT London Wetland Centre, Wrythe Recreation Ground, Wrythe Green, Wormwood Scrubs including Old Oak Common, Wormholt Park, Wormholt Estate, World's End Estate, Woolwich Common and Royal Artillery Barracks', Woolwich Cemetery (Old and New), Wool House Garden, Woodside Park'
-    print(y.replace("'",""))
+    # print(y.replace("'",""))
 
 def main():
-    # populate_constructor()
-    create_list_names()
+    populate_constructor()
+    # create_list_names()
 
 
 if __name__ == "__main__":
