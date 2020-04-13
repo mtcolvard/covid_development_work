@@ -4,6 +4,7 @@ from mapbox import DirectionsMatrix
 import mapboxGeoJsonConstructor
 
 thingy = list(mapboxGeoJsonConstructor.collection_one.values())
+pride_of_spitalfields = (-0.071132, 51.518891)
 
 q=[-0.048721755995117, 51.51258512161]
 w=[-0.045418257473052, 51.522421981895]
@@ -31,59 +32,57 @@ v=[-0.056712637941541, 51.528005220953]
 b=[-0.017116408507303, 51.510256445333]
 n=[-0.041096815873977, 51.522349881668]
 m=[-0.032918650586594, 51.511421844157]
-q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,m,
-
-qq=[51.514353, -0.074898][::-1]
-ww=[51.519103, -0.060526][::-1]
-ee=[51.521890, -0.046287][::-1]
-rr=[51.525327, -0.033322][::-1]
-tt=[51.527436, -0.023635][::-1]
-yy=[51.531020, -0.011012][::-1]
-uu=[51.528275, 0.005575][::-1]
-ii=[51.531695, 0.018645][::-1]
-oo=[51.535669, 0.036456][::-1]
-pp=[51.525364, 0.059439][::-1]
+q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,m
 
 
-pride_of_spitalfields = (-0.071132, 51.518891)
-origin = [51.513686, -0.088323][::-1]
-destination = [51.550540, 0.101267][::-1]
+
 list_of_waypoints = []
+b = [51.550540, 0.101267][::-1]
+d  =[51.521890, -0.046287][::-1]
+i  =[51.525327, -0.033322][::-1]
+e =[51.527436, -0.023635][::-1]
+h =[51.531020, -0.011012][::-1]
+g =[51.528275, 0.005575][::-1]
+f =[51.531695, 0.018645][::-1]
+c  =[51.535669, 0.036456][::-1]
+j =[51.525364, 0.059439][::-1]
+
 
 
 service = DirectionsMatrix(access_token='pk.eyJ1IjoibXRjb2x2YXJkIiwiYSI6ImNrMDgzYndkZjBoanUzb21jaTkzajZjNWEifQ.ocEzAm8Y7a6im_FVc92HjQ')
 
-response = service.matrix([origin, destination, qq,ww,ee,rr,tt,yy,uu,ii,oo,pp], profile='mapbox/walking',  annotations=['distance'])
 
 
-data = response.json()
-responseStatusCode = response.status_code
-responseHeader = response.headers
 
 def find_route_waypoints():
-    # calculate the distance to each possible waypoint from both the origin and the destination
-    number_of_loops = 0
-    distances_from_origin = data['distances'][0]
-    # print(distances_from_origin)
-    distances_from_destination = data['distances'][1]
-    while number_of_loops < 7:
+    loop_count = 0
+    a = [-0.084254, 51.518961]
+    features_list = [a,b,c,d,e,f,g,h,i]
+    while loop_count < 6:
+        response = service.matrix(features_list, profile='mapbox/walking', sources=[0,1],  annotations=['distance'])
+        data = response.json()
+        # calculate the distance to each possible waypoint from both the origin and the destination
+        distances_from_origin = data['distances'][0]
+        distances_from_destination = data['distances'][1]
 
         # for each possible waypoint, sum its distance from both the origin and the destination and then find the waypoint with the smallest total distance.  that will the waypoint of the shortest route. use the index of that waypoint to get the lon_lat
         sum_distances = list(map(add, distances_from_origin, distances_from_destination))
         shortest_distance_index = sum_distances.index(sorted(sum_distances)[2])
-        distances_from_origin = data['distances'][shortest_distance_index]
-        distances_from_origin.remove(distances_from_origin[shortest_distance_index])
-        # print(data['distances'][shortest_distance_index])
-        number_of_loops = number_of_loops + 1
         waypoint_lon_lat = data['destinations'][shortest_distance_index]['location']
-
         list_of_waypoints.append(waypoint_lon_lat)
-        # print(shortest_distance_index)
-        # print(distances_from_origin)
-        # print(waypoint_lon_lat)
-        print(list_of_waypoints)
-
+        # print('features_list_before', features_list)
+        features_list.remove(features_list[shortest_distance_index])
+        a = waypoint_lon_lat
+        loop_count = loop_count + 1
+        print('shortest_distance_index', shortest_distance_index)
+        print('distances_from_destination',distances_from_destination)
+        print('sum_distances', sum_distances)
+        # print('sorted_sum_distances',sorted(sum_distances))
+        # print('list_of_waypoints',list_of_waypoints)
 find_route_waypoints()
+
+# responseStatusCode = response.status_code
+# responseHeader = response.headers
 
 
 
@@ -91,9 +90,9 @@ find_route_waypoints()
 from pprint import pprint
 # pprint(responseStatusCode)
 # pprint(responseHeader)
-# pprint(response.json())
 # pprint(response.json()['distances'][0])
 # pprint(response.json()['distances'][1])
+# pprint(response.json())
 # pprint(distances_from_origin)
 
 # def main():
