@@ -47,6 +47,7 @@ def find_route_waypoints():
         waypoint_lon_lat = data['destinations'][min_distance_index]['location']
         list_of_waypoints.append(waypoint_lon_lat)
         features_list.remove(features_list[min_distance_index])
+        aa = waypoint_lon_lat
         loop_count = loop_count + 1
         print(list_of_waypoints)
 

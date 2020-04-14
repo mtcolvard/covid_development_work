@@ -29,10 +29,10 @@ def find_route_waypoints():
         distances_from_destination = data['distances'][1]
 # for each potential waypoint in the features_list, sum its distance from both the origin and the destination and then find the waypoint with the smallest total distance.
         sum_distances = list(map(add, distances_from_origin, distances_from_destination))
+        del sum_distances[0:2]
         dictex = dict(zip(features_list_dict.keys(), sum_distances))
         print(dictex)
 # delete the first two values as they represent the origin and the destination in the features_list
-        del sum_distances[0:2]
         average_distance = sum(sum_distances)/len(sum_distances)
 # convert the sum_distances list into a dictionary to keep track of indexes relative to the features_list
 

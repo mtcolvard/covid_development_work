@@ -91,13 +91,13 @@ class ConstructGeoJson:
     def __init__(self, name, coordinates):
         self.name = name
         self.coordinates = coordinates
-        self.geo_json_item = {'type': 'Feature',
+        self.geo_json_item = {self.name:{'type': 'Feature',
                             'properties': {'name': self.name},
                             'geometry': {'type': 'Point',
-                                        'coordinates': self.coordinates}}
+                                        'coordinates': self.coordinates}}}
         # print(str("_".join(self.name.split())), ' = ', geo_json_item, ',')
 
-        print(self.coordinates)
+        print(self.geo_json_item)
 
 def populate_constructor():
     for item in collection_one.items():

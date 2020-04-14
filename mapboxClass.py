@@ -80,15 +80,6 @@ def find_route_waypoints():
         waypoint_lon_lat = data['destinations'][sum_distances_dict_min]['location']
         list_of_waypoints.append(waypoint_lon_lat)
         features_list.remove(features_list[sum_distances_dict_min])
-
-
-        # sum_distances_minus_average = [x - average_distance for x in sum_distances]
-        # print(sorted(sum_distances_minus_average)[0])
-        # shortest_distance_index = sum_distances_minus_average.index(sorted(sum_distances_minus_average)[0])
-        # waypoint_lon_lat = data['destinations'][shortest_distance_index]['location']
-        # list_of_waypoints.append(waypoint_lon_lat)
-        # print('features_list_before', features_list)
-        # features_list.remove(features_list[shortest_distance_index])
         aa = waypoint_lon_lat
         loop_count = loop_count + 1
         # print('shortest_distance_index', shortest_distance_index)
