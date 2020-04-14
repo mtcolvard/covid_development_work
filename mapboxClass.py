@@ -37,15 +37,15 @@ q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,m
 
 
 list_of_waypoints = []
-b = [51.550540, 0.101267][::-1]
-d  =[51.521890, -0.046287][::-1]
-i  =[51.525327, -0.033322][::-1]
-e =[51.527436, -0.023635][::-1]
-h =[51.531020, -0.011012][::-1]
-g =[51.528275, 0.005575][::-1]
-f =[51.531695, 0.018645][::-1]
-c  =[51.535669, 0.036456][::-1]
-j =[51.525364, 0.059439][::-1]
+bb = [51.550540, 0.101267][::-1]
+cc  =[51.535669, 0.036456][::-1]
+dd  =[51.521890, -0.046287][::-1]
+ee =[51.527436, -0.023635][::-1]
+ff =[51.531695, 0.018645][::-1]
+gg =[51.528275, 0.005575][::-1]
+hh =[51.531020, -0.011012][::-1]
+ii  =[51.525327, -0.033322][::-1]
+jj =[51.525364, 0.059439][::-1]
 
 
 
@@ -56,27 +56,44 @@ service = DirectionsMatrix(access_token='pk.eyJ1IjoibXRjb2x2YXJkIiwiYSI6ImNrMDgz
 
 def find_route_waypoints():
     loop_count = 0
-    a = [-0.084254, 51.518961]
-    features_list = [a,b,c,d,e,f,g,h,i]
-    while loop_count < 6:
+    aa = [-0.084254, 51.518961]
+    features_list = [aa,bb,cc,dd,ee,ff,gg,hh]
+    while loop_count < 1:
         response = service.matrix(features_list, profile='mapbox/walking', sources=[0,1],  annotations=['distance'])
         data = response.json()
-        # calculate the distance to each possible waypoint from both the origin and the destination
+# calculate the distance to each possible waypoint from both the origin and the destination
         distances_from_origin = data['distances'][0]
         distances_from_destination = data['distances'][1]
-
-        # for each possible waypoint, sum its distance from both the origin and the destination and then find the waypoint with the smallest total distance.  that will the waypoint of the shortest route. use the index of that waypoint to get the lon_lat
+# for each possible waypoint, sum its distance from both the origin and the destination and then find the waypoint with the smallest total distance.  that will the waypoint of the shortest route. use the index of that waypoint to get the lon_lat
         sum_distances = list(map(add, distances_from_origin, distances_from_destination))
-        shortest_distance_index = sum_distances.index(sorted(sum_distances)[2])
-        waypoint_lon_lat = data['destinations'][shortest_distance_index]['location']
+        print(sum_distances)
+        del sum_distances[0:2]
+        average_distance = sum(sum_distances)/len(sum_distances)
+        sum_distances_dict = {}
+        for i in range(len(sum_distances)):
+            sum_distances_dict[i] = sum_distances[i]
+        print(sum_distances_dict)
+        sum_distances_minus_average = {k:v-average_distance for (k,v) in sum_distances_dict.items()}
+        sum_distances_dict_min = {k:v for k,v in sorted(sum_distances_minus_average.items(), key=lambda item: item[1])}
+        print(sum_distances_dict_min)
+        # shortest_distance_index = sum_distances_dic_min.index(sorted(sum_distances_dic_min)[0])
+        waypoint_lon_lat = data['destinations'][sum_distances_dict_min]['location']
         list_of_waypoints.append(waypoint_lon_lat)
+        features_list.remove(features_list[sum_distances_dict_min])
+
+
+        # sum_distances_minus_average = [x - average_distance for x in sum_distances]
+        # print(sorted(sum_distances_minus_average)[0])
+        # shortest_distance_index = sum_distances_minus_average.index(sorted(sum_distances_minus_average)[0])
+        # waypoint_lon_lat = data['destinations'][shortest_distance_index]['location']
+        # list_of_waypoints.append(waypoint_lon_lat)
         # print('features_list_before', features_list)
-        features_list.remove(features_list[shortest_distance_index])
-        a = waypoint_lon_lat
+        # features_list.remove(features_list[shortest_distance_index])
+        aa = waypoint_lon_lat
         loop_count = loop_count + 1
-        print('shortest_distance_index', shortest_distance_index)
-        print('distances_from_destination',distances_from_destination)
-        print('sum_distances', sum_distances)
+        # print('shortest_distance_index', shortest_distance_index)
+        # print('distances_from_destination',distances_from_destination)
+        # print('sum_distances', sum_distances)
         # print('sorted_sum_distances',sorted(sum_distances))
         # print('list_of_waypoints',list_of_waypoints)
 find_route_waypoints()
