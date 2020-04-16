@@ -33,6 +33,7 @@ features_list_dict_tower_hamlets = {
 'jj': [-0.061301863303676, 51.521786360354]
 }
 list_of_waypoints = []
+list_of_waypoints_names = []
 
 
 def find_route_waypoints():
@@ -56,22 +57,15 @@ def find_route_waypoints():
     sum_distances_dict = dict(zip(features_list_dict_tower_hamlets.keys(), sum_distances))
 
     sum_distances_minus_average = {k:v-average_distance for (k,v) in sum_distances_dict.items()}
-    waypoint_distances_closer_than_average = {k:v for (k, v) in sum_distances_minus_average.items() if v<0}
+    waypoint_distances_closer_than_average = {k:v for (k, v) in sum_distances_minus_average.items() if v < 0}
     waypoint_distance_from_origin = {k:v for (k,v) in distances_from_origin_dict.items() if k in distances_from_origin_dict.keys() & waypoint_distances_closer_than_average.keys()}
     del waypoint_distance_from_origin['aa']
 
     closest_waypoint = min(waypoint_distance_from_origin, key=waypoint_distance_from_origin.get)
     print(closest_waypoint)
-
-
-
-
-#     min_distance = min(sum_distances_minus_average.values())
-#     min_distance_index = [num for num, distance in sum_distances_minus_average.items() if distance == min_distance ]
-# # add '2' to the min_distance_index to account for the origin and destination you deleted
-#     min_distance_index = min_distance_index[0] + 2
-#     waypoint_lon_lat = data['destinations'][min_distance_index]['location']
-#     list_of_waypoints.append(waypoint_lon_lat)
+    list_of_waypoints.append(features_list_dict_tower_hamlets[closest_waypoint])
+    list_of_waypoints_names.append(closest_waypoint)
+    print(list_of_waypoints_names)
 #     features_list.remove(features_list[min_distance_index])
 #     # loop_count = loop_count + 1
 #     # print(list_of_waypoints)
