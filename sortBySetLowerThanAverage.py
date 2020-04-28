@@ -17,7 +17,7 @@ service = DirectionsMatrix(access_token='pk.eyJ1IjoibXRjb2x2YXJkIiwiYSI6ImNrMDgz
 
 
 
-origin = [-0.047092, 51.519331 ]
+origin = [-0.047092, 51.519331]
 destination = [-0.043618, 51.538311]
 
 features_list_dict_tower_hamlets = {
@@ -41,7 +41,7 @@ def find_route_waypoints():
 
     features_list = [features_list_dict_tower_hamlets['aa'], features_list_dict_tower_hamlets['bb'], features_list_dict_tower_hamlets['cc'], features_list_dict_tower_hamlets['dd'], features_list_dict_tower_hamlets['ee'], features_list_dict_tower_hamlets['ff'], features_list_dict_tower_hamlets['gg'], features_list_dict_tower_hamlets['hh']]
 
-    response = service.matrix(features_list, profile='mapbox/walking', sources=[0,1],  annotations=['distance'])
+    response = service.matrix(features_list, profile='mapbox/walking', sources=[0, 1], annotations=['distance'])
     data = response.json()
 
     # calculate the distance to each possible waypoint from both the origin and the destination
@@ -56,9 +56,9 @@ def find_route_waypoints():
     distances_from_origin_dict = dict(zip(features_list_dict_tower_hamlets.keys(), distances_from_origin))
     sum_distances_dict = dict(zip(features_list_dict_tower_hamlets.keys(), sum_distances))
 
-    sum_distances_minus_average = {k:v-average_distance for (k,v) in sum_distances_dict.items()}
+    sum_distances_minus_average = {k:v-average_distance for (k, v) in sum_distances_dict.items()}
     waypoint_distances_closer_than_average = {k:v for (k, v) in sum_distances_minus_average.items() if v < 0}
-    waypoint_distance_from_origin = {k:v for (k,v) in distances_from_origin_dict.items() if k in distances_from_origin_dict.keys() & waypoint_distances_closer_than_average.keys()}
+    waypoint_distance_from_origin = {k:v for (k, v) in distances_from_origin_dict.items() if k in distances_from_origin_dict.keys() & waypoint_distances_closer_than_average.keys()}
     del waypoint_distance_from_origin['aa']
 
     closest_waypoint = min(waypoint_distance_from_origin, key=waypoint_distance_from_origin.get)

@@ -1,8 +1,7 @@
 import math
 
-origin = [-0.071132,51.518891]
+origin = [-0.071132, 51.518891]
 bb_width = 1000
-
 
 def calc_lon_lat_offset(*args):
     global lat_offset, lon_offset
