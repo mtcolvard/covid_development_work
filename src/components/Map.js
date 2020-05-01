@@ -22,8 +22,7 @@ class Map extends React.Component {
   }
 
   handleMapClick({ lngLat }) {
-    this.setState({ showPopup: false },
-    this.getBikePoints(lngLat[1], lngLat[0]))
+    this.setState({ showPopup: false }, this.getBikePoints(lngLat[1], lngLat[0]))
   }
 
   getBikePoints(lat, lon) {
@@ -45,13 +44,13 @@ class Map extends React.Component {
         latitude={51.515}
         longitude={-0.078}
         zoom={12}
-        mapStyle="mapbox://styles/mapbox/streets=v9"
+        mapStyle="mapbox://styles/mapbox/streets-v9"
         onClick={this.handleMapClick}
       >
         {bikePoints.map(point => (
           <Marker
             key={point.id}
-            onClick={this.handlePinCLick}
+            onClick={this.handlePinClick}
             {...point}
           />
         ))}

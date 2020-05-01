@@ -1,14 +1,14 @@
-const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: './src/app.js',
   output: {
-    path: path.resolve('dist'),
-    filename: 'bundle.js'
+    path: `${__dirname}/dist`,
+    filename: 'bundle.js',
+    publicPath: '/'
   },
-  devtool: 'source-maps',
   module: {
     rules: [
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
@@ -16,14 +16,17 @@ module.exports = {
       { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] }
     ]
   },
+  mode: 'development',
   devServer: {
-    contentBase: path.resolve('src'),
     hot: true,
-    open: true,
+    inline: true,
     port: 8000,
+    open: true,
+    contentBase: ['src'],
     watchContentBase: true
   },
   plugins: [
+    new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
