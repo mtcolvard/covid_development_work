@@ -1,5 +1,5 @@
 import math
-import mapbox; help(mapbox.DirectionsMatrix)
+import mapbox; help(mapbox.Geocoder)
 # # pride of spitalfields
 # origin = [-0.071132, 51.518891]
 # # hackney marshes
