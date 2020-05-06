@@ -208,24 +208,5 @@ if __name__ == "__main__":
 # #     mapped = str.maketrans(str1, str2)
 # #     return dna.translate(mapped)
 #
-#
-# # nums = [11, 200, 7, 44]
-# #
-# # # with map
-# # nums2 = map(lambda x: x*2, nums)
-# # print(nums2)
-#
-#
-#
-# # with list comprehension
-# # nums2 = [x*2 for x in nums]
-# # print(nums2)
-#
-#
-# # def getCount(inputStr):
-# #
-# #     # num_vowels = 0
-# #     # or 'e' or 'i' or 'o' or 'u'
-# #     regex = 'a'
-# #     match = re.findall(regex, inputStr)
-# #     print(match)
+# getCount("abracadabree")
+# getCount("abracadabree")
