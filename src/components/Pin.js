@@ -16,7 +16,7 @@ const Pin = props => (
     height={20}
     viewBox="0 0 24 24"
     style={{
-      pinStyle,
+      ...pinStyle,
       transform: `translate(${-20 / 2}px,${-20}px)`
     }}
     onClick={props.onClick}
