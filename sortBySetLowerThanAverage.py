@@ -4,19 +4,6 @@ import pydash
 
 service = DirectionsMatrix(access_token='pk.eyJ1IjoibXRjb2x2YXJkIiwiYSI6ImNrMDgzYndkZjBoanUzb21jaTkzajZjNWEifQ.ocEzAm8Y7a6im_FVc92HjQ')
 
-# features_list_dict_straight_line = {'bb': [51.550540, 0.101267][::-1],
-# 'cc': [51.535669, 0.016456][::-1],
-# 'dd': [51.521890, -0.046287][::-1],
-# 'ee': [51.527436, -0.023635][::-1],
-# 'ff': [51.531695, 0.018645][::-1],
-# 'gg': [51.528275, 0.005575][::-1],
-# 'hh': [51.531020, -0.011012][::-1],
-# 'ii': [51.525327, -0.033322][::-1],
-# 'jj': [51.525364, 0.059439][::-1]
-# }
-
-
-
 origin = [-0.047092, 51.519331]
 destination = [-0.043618, 51.538311]
 
@@ -40,6 +27,7 @@ def find_route_waypoints():
     loop_count = 0
 
     features_list = [features_list_dict_tower_hamlets['aa'], features_list_dict_tower_hamlets['bb'], features_list_dict_tower_hamlets['cc'], features_list_dict_tower_hamlets['dd'], features_list_dict_tower_hamlets['ee'], features_list_dict_tower_hamlets['ff'], features_list_dict_tower_hamlets['gg'], features_list_dict_tower_hamlets['hh']]
+    print(features_list)
 
     response = service.matrix(features_list, profile='mapbox/walking', sources=[0, 1], annotations=['distance'])
     data = response.json()
@@ -58,6 +46,7 @@ def find_route_waypoints():
 
     sum_distances_minus_average = {k:v-average_distance for (k, v) in sum_distances_dict.items()}
     waypoint_distances_closer_than_average = {k:v for (k, v) in sum_distances_minus_average.items() if v < 0}
+
     waypoint_distance_from_origin = {k:v for (k, v) in distances_from_origin_dict.items() if k in distances_from_origin_dict.keys() & waypoint_distances_closer_than_average.keys()}
     del waypoint_distance_from_origin['aa']
 
