@@ -11,7 +11,7 @@ graph["thom"] = []
 graph["jonny"] = []
 
 def person_is_seller(name):
-    return name[-1] == 'm'
+    return name[-1] == 'y'
 
 def breadthFirstSearch(name):
     print(graph)
