@@ -45,6 +45,8 @@ graph['d']['fin'] = 1
 
 graph['fin'] = {}
 
+print(graph)
+
 infinity = float('inf')
 costs = {}
 costs['a'] = 5
@@ -54,8 +56,8 @@ costs['d'] = infinity
 costs['fin'] = infinity
 
 parents = {}
-parents['a'] = 'start'
-parents['b'] = 'start'
+parents['a'] = None
+parents['b'] = None
 parents['c'] = None
 parents['d'] = None
 parents['fin'] = None
