@@ -113,16 +113,18 @@ def run_dijkstra():
         waypoints_processed.append(node)
         node = find_lowest_cost_node()
     print(waypoints_parents)
-    trace_dijkstra_path()
+    backtrace_dijkstra_path()
     return waypoints_costs[graph_nodes[-1]]
 
-def trace_dijkstra_path():
-    path = []
+def backtrace_dijkstra_path():
+    dijkstra_path = []
     waypoint = waypoints_parents[graph_nodes[-1]]
     while waypoint is not graph_nodes[0]:
-        path.append(waypoint)
-        waypoint = waypoints_parents[path[-1]]
-    print(path)
-    return path
+        dijkstra_path.append(waypoint)
+        waypoint = waypoints_parents[dijkstra_path[-1]]
+    dijkstra_path.reverse()
+    print(dijkstra_path)
+    return dijkstra_path
+
 
 run_dijkstra()
