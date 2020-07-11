@@ -88,41 +88,8 @@ def find_lowest_cost_node():
             lowest_cost_node = node
     return lowest_cost_node
 
-# graph = {}
-# graph["you"] = ["alice", "bob", "claire"]
-# graph["bob"] = ["anuj", "peggy"]
-# graph["alice"] = ["peggy"]
-# graph["claire"] = ["thom", "jonny"]
-# graph["anuj"] = []
-# graph["peggy"] = []
-# graph["thom"] = []
-# graph["jonny"] = []
-#
-# def person_is_seller(name):
-#     return name[-1] == 'm'
-#
-# def search(name):
-#     print(graph)
-#     search_que = deque()
-#     search_que += graph[name]
-#     searched = []
-#     while search_que:
-#         person = search_que.popleft()
-#         if not person in searched:
-#             if person_is_seller(person):
-#                 print(person + ' is mango seller')
-#                 return True
-#             else:
-#                 search_que += graph[person]
-#                 searched.append(person)
-#     return False
-
-
 def main():
-    # search('you')
     dijkstra()
-
-
 
 if __name__ == "__main__":
     main()
