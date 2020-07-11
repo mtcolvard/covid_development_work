@@ -4,12 +4,15 @@ dist_next = {}
 
 count = 0
 total_dict_keys = list(total_dict.keys())
+# def create_dijkstra_hashtable():
 for key in total_dict_keys:
-    if len(total_dict_keys) -1 > count:
+    if len(total_dict_keys) -3 > count:
         dist_next[key] = {}
-        dist_next[key][total_dict_keys[count + 1]] = 3
-        # [total_dict][total_dict_keys[count + 1]]['lon_lat']
+        dist_next[key][total_dict_keys[count + 1]] = total_dict[total_dict_keys[count + 1]]['lon_lat']
+        dist_next[key][total_dict_keys[count + 2]] = total_dict[total_dict_keys[count + 2]]['lon_lat']
+        dist_next[key][total_dict_keys[count + 3]] = total_dict[total_dict_keys[count + 3]]['lon_lat']
         print(total_dict_keys[count])
         count = count + 1
         print(count)
-        print(dist_next)
+print(dist_next)
+            
