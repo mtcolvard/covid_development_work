@@ -42,17 +42,17 @@ def populate_graph_with_distances_and_angles(all_waypoints):
     return waypoint_route_order
 
 def filter_graph_by_angle_then_distance(waypoints_graph):
-    waypoint_route_order = ['origin']
+    route_order = ['origin']
     next_park = None
-    while waypoint_route_order:
+    while route_order:
         if next_park == 'destination':
             break
-        angle_filtered_park_options = {k:v for k, v in waypoints_graph[waypoint_route_order[-1]].items() if
+        angle_filtered_park_options = {k:v for k, v in waypoints_graph[route_order[-1]].items() if
         v[1] != 0 and
-        v[1] < (waypoints_graph[waypoint_route_order[-1]]['destination'][1] + math.pi/5) and
-        v[1] > (waypoints_graph[waypoint_route_order[-1]]['destination'][1] - math.pi/5)}
+        v[1] < (waypoints_graph[route_order[-1]]['destination'][1] + math.pi/5) and
+        v[1] > (waypoints_graph[route_order[-1]]['destination'][1] - math.pi/5)}
         next_park = min(angle_filtered_park_options, key=lambda distance: angle_filtered_park_options[distance][0])
-        waypoint_route_order.append(next_park)
-    return waypoint_route_order
+        route_order.append(next_park)
+    return route_order
 
 populate_graph_with_distances_and_angles(total_dict)
